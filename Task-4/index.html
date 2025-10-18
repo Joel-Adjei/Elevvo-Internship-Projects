@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Blog Homepage</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-gray-50 font-sans">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-md sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">
+                My Personal Dev & Life Blog
+            </h1>
+            <p class="text-sm text-gray-500 mt-1">A collection of thoughts on Tech, Travel, and Food.</p>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <div class="mb-8 p-6 bg-white rounded-xl shadow-lg border border-gray-100">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Explore Topics</h2>
+
+            <div id="category-filter-container" class="flex flex-wrap gap-2 mb-6">
+                <!-- Buttons will be injected here by JS -->
+            </div>
+
+            <div class="relative">
+                <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Search posts by title keyword..."
+                    class="w-full p-3 pl-10 pr-10 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition-shadow"
+                    aria-label="Search blog posts"
+                />
+
+                <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+
+                <button
+                    id="clear-search-btn"
+                    class="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 text-gray-500 hover:text-gray-800 hidden"
+                    aria-label="Clear search"
+                >
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <h2 id="post-list-title" class="text-3xl font-extrabold text-gray-900 mb-6">
+            Latest Posts
+        </h2>
+
+        <div id="post-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Post cards will be injected here by JS -->
+        </div>
+
+        <div id="results-message-container">
+            <!-- Messages will be injected here by JS -->
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center py-6 mt-12">
+        <p class="text-sm">&copy; <span id="current-year"></span> My Personal Blog. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
