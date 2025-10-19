@@ -15,7 +15,7 @@ const CurrentWeatherCard = ({ data , setUnit, unit , unitSymbol}) => {
         className="flex flex-col items-center justify-center p-6 md:p-10 col-span-1 md:col-span-2 lg:col-span-3 min-h-[300px] lg:min-h-[400px]"
       >
         <motion.div
-            key={data.icon} // Key ensures re-animation on data refresh
+            key={data.icon}
             initial={{ scale: 0.5, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", stiffness: 100 }}
@@ -43,7 +43,6 @@ const CurrentWeatherCard = ({ data , setUnit, unit , unitSymbol}) => {
         <p className="text-sm md:text-base text-sky-200 mt-1">{date}</p>
         <p className="text-lg md:text-xl font-medium capitalize text-sky-100 mt-2">{data.description}</p>
         
-        {/* Unit Toggle */}
         <div className="flex items-center space-x-2 mt-4 text-sm font-semibold text-white">
           <button
             onClick={() => setUnit('metric')}

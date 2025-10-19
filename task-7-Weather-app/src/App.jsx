@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useMemo, useEffect } from "react";
 import axios from "axios";
-import { motion , AnimatePresence} from 'framer-motion';
-import { Droplet, MapPin, RefreshCw, Search, Thermometer, Wind } from "lucide-react";
+import { motion, AnimatePresence} from 'framer-motion';
+import { Droplet, RefreshCw, Thermometer, Wind } from "lucide-react";
 import { filterDailyForecast } from "./util/util";
 import LoadingState from "./components/LoadingState"
 import ErrorMessage from "./components/ErrorMessage"
@@ -9,9 +9,9 @@ import CurrentWeatherCard from "./components/CurrentWeatherCard"
 import DetailItem from "./components/DetailItem"
 import ForecastDayCard from "./components/ForecastDayCard"
 import GlassCard from "./components/ui/GlassCard"
+import CitySearchInput from "./components/CitySearchInput"
 
 function App() {
-  const [city, setCity] = useState("");
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecast, setForecast] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -88,15 +88,7 @@ function App() {
     [unit]
   );
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    getWeatherData("city", city);
-    setCity(""); // Clear input after search
-  };
-
-  // Handler for geolocation
-  const handleLocation = (isInitialLoad = false) => {
-    // Added isInitialLoad flag
+  const handleLocation = useCallback((isInitialLoad = false) => {
     setLoading(true);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -108,11 +100,8 @@ function App() {
           console.error("Geolocation Error:", err);
 
           if (isInitialLoad) {
-            // FIX: If location fails on initial load, silently fallback to a default city (London)
-            // This prevents the app from being stuck on an error state on first load.
             getWeatherData("city", "London");
           } else {
-            // If location fails on a manual button click, show an error
             setError(
               "Location access denied or failed. Please search for a city instead."
             );
@@ -124,19 +113,25 @@ function App() {
     } else {
       setError("Geolocation is not supported by this browser.");
       setLoading(false);
-      // No fallback needed here, as the useEffect already handles the !navigator.geolocation case.
     }
-  };
+  }, [getWeatherData]);
+
+
+  const handleCitySelect = useCallback((city) => {
+    if (city.latitude && city.longitude) {
+      getWeatherData("coords", { lat: city.latitude, lon: city.longitude });
+    } else {
+      getWeatherData("city", city.name);
+    }
+  }, [getWeatherData]);
 
   useEffect(() => {
-    // Attempt to get location weather on initial load if supported
     if (navigator.geolocation) {
-      handleLocation(true); // Pass true to enable the initial load fallback logic
+      handleLocation(true);
     } else {
-      // Fallback to a default city if geolocation not supported
       getWeatherData("city", "London");
     }
-  }, [getWeatherData]); // Dependency on getWeatherData ensures it runs when unit changes
+  }, [getWeatherData, handleLocation]);
 
   return (
     <>
@@ -147,42 +142,13 @@ function App() {
         </h1>
 
         {/* Search Bar & Location Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8 p-3 bg-white/10 backdrop-blur-md rounded-2xl shadow-xl flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4"
-        >
-          <form onSubmit={handleSearch} className="flex-grow flex">
-            <input
-              type="text"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              placeholder="Search for a city..."
-              className="flex-grow p-3 text-white bg-transparent border border-white/30 rounded-l-xl focus:ring-1 focus:ring-sky-300 focus:border-sky-300 outline-none placeholder-sky-200 transition-all"
-            />
-            <motion.button
-              type="submit"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-sky-500 hover:bg-sky-600 text-white outline-none p-3 rounded-r-xl transition-colors flex items-center justify-center"
-              aria-label="Search"
-            >
-              <Search className="w-6 h-6" />
-            </motion.button>
-          </form>
-
-          <motion.button
-            onClick={() => handleLocation(false)} // Explicitly call handleLocation for manual click
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-indigo-500 hover:bg-indigo-600 text-white p-3 outline-none rounded-xl transition-colors flex items-center justify-center space-x-2 w-full md:w-auto"
-            aria-label="Get weather for current location"
-          >
-            <MapPin className="w-5 h-5" />
-            <span className="font-semibold hidden sm:inline">My Location</span>
-          </motion.button>
-        </motion.div>
+        <div className="sticky top-1 mb-8 p-3 z-50 bg-white/10 backdrop-blur-md rounded-2xl shadow-xl flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4">
+          <CitySearchInput 
+            onCitySelect={handleCitySelect}
+            onLocationClick={() => handleLocation(false)}
+            className="flex-grow flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4"
+          />
+        </div>
 
         {/* Main Content Area (Loading/Error/Data) */}
         <AnimatePresence mode="wait">
@@ -204,15 +170,14 @@ function App() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
-              className="grid grid-cols-1 lg:grid-cols-4 gap-6"
+              className="z-0 grid grid-cols-1 lg:grid-cols-4 gap-6"
             >
-              {/* Current Weather Card (Span 3 on desktop) */}
+            
               <div className="lg:col-span-2">
                  <CurrentWeatherCard setUnit={setUnit} unit={unit} unitSymbol={unitSymbol} data={currentWeather} />
               </div>
 
-
-              {/* Extra Details Card (Span 2 on desktop) */}
+          
               <GlassCard
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -242,7 +207,7 @@ function App() {
                   unit={speedUnit}
                   delay={0.4}
                 />
-                 {/* Refresh Button - acts as another detail item */}
+                 
                 <motion.button
                   whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.15)' }}
                   whileTap={{ scale: 0.95 }}
