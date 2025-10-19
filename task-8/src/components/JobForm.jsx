@@ -130,7 +130,7 @@ const JobForm = ({ job, onSubmit, onCancel }) => {
               type="submit"
               className="flex-1 bg-primary text-primary-foreground px-6 py-3 rounded-full font-medium hover:bg-primary-hover transition-smooth"
             >
-              {job ? 'Update Application' : 'Add Application'}
+              {job ? 'Update' : 'Add'}
             </button>
             <button
               type="button"

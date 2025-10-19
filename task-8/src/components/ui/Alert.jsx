@@ -30,8 +30,8 @@ const Alert = ({ display=false , heading , subheading , meassage , onOkay , onCa
     }
   
     return (
-    <div className='fixed bg-foreground/20 backdrop-blur-sm h-full w-full top-0 left-0 flex items-center justify-center z-50'>
-        <div className='bg-card p-6 px-4 rounded-lg shadow-lg w-96'>
+    <div className='fixed bg-foreground/20 backdrop-blur-sm h-full w-full top-0 left-0 flex items-center justify-center px-4 z-50'>
+        <div className='bg-card p-6 rounded-lg shadow-lg w-96'>
             <div className='flex flex-col items-center mb-2'>
                 {getIcon()}
             </div>
