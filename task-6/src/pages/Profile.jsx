@@ -43,7 +43,6 @@ const Profile = () => {
           Account Settings
         </h2>
         <div onSubmit={handleSubmit} className="flex flex-col md:flex-row justify-between space-y-6">
-          {/* Profile Image */}
           <div className="flex items-center space-x-6 pb-4">
             <img
               src={formData.profileImage}
@@ -91,7 +90,6 @@ const Profile = () => {
           handleclose={() => setDisplayModal(false)}
         >
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* General Info */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <label
@@ -130,7 +128,6 @@ const Profile = () => {
               </div>
             </div>
 
-            {/* Password */}
             <div className="space-y-2 pt-4 border-t">
               <label
                 htmlFor="password"

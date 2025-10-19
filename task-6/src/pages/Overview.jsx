@@ -28,7 +28,6 @@ const Overview = () => {
   
     return (
       <div className="space-y-8 pt-4">
-        {/* 1. Summary Cards */}
         <div className="grid  grid-cols-1 md:grid-cols-3 gap-6">
           <StatCard
             title="Total Projects"
@@ -49,10 +48,8 @@ const Overview = () => {
             color="bg-white"
           />
         </div>
-  
-        {/* 2. Charts and Activity */}
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Earnings Bar Chart */}
           <Card className="lg:col-span-2">
             <h2 className="text-xl font-semibold text-slate-900 mb-4 flex items-center"><TrendingUp size={18} className="mr-2 text-yellow-500"/> Monthly Earning Trend</h2>
             <div style={{ width: '100%', height: 300 }}>
@@ -72,7 +69,6 @@ const Overview = () => {
             </div>
           </Card>
   
-          {/* Task Distribution Pie Chart */}
           <Card className="flex flex-col items-center">
             <h2 className="text-xl font-semibold text-slate-900 mb-4 flex items-center"><PieChart size={18} className="mr-2 text-yellow-500"/> Task Distribution</h2>
             <div style={{ width: '100%', height: 300 }}>
@@ -104,7 +100,6 @@ const Overview = () => {
           </Card>
         </div>
   
-        {/* 3. Recent Activity List */}
         <Card>
           <h2 className="text-xl font-semibold text-slate-900 mb-4 flex items-center"><List size={18} className="mr-2 text-yellow-500"/> Recent Activity</h2>
           <div className="space-y-4">

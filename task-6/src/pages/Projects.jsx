@@ -119,7 +119,6 @@ const Projects = () => {
     return (
       <div className="space-y-6 pt-4">
         <Card className="flex flex-col sm:flex-row justify-between items-center gap-4 p-4">
-          {/* Search Bar */}
           <div className="relative w-full sm:flex-1 sm:w-1/2">
             <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" />
             <input
@@ -131,7 +130,6 @@ const Projects = () => {
             />
           </div>
   
-          {/* Status Filter Dropdown */}
           <div className="relative sm:w-auto">
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -157,7 +155,6 @@ const Projects = () => {
           </div>
         </Card>
   
-        {/* Projects Grid/Card Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredProjects.length > 0 ? (
             filteredProjects.map(project => (

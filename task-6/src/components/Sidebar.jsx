@@ -46,7 +46,7 @@ const navItems = [
             })}
           </nav>
   
-          {/* User Info (Optional - placed here for a professional look) */}
+      
           <div className="p-4 mt-auto bg-slate-800 flex items-center shadow-lg">
             <img
               className="w-10 h-10 rounded-full object-cover border-2 border-yellow-400"

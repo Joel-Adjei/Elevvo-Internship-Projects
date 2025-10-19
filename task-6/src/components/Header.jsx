@@ -16,7 +16,6 @@ const Header = ({ setIsMenuOpen }) => {
     const navigate = useNavigate();
     const dropdownRef = useRef(null);
 
-    // Close dropdown when clicking outside
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -33,7 +32,6 @@ const Header = ({ setIsMenuOpen }) => {
     return (
       <header className="fixed top-0 right-0 left-0 lg:left-64 h-16 bg-white shadow-sm z-30 transition-all duration-300">
         <div className="flex justify-between items-center h-full px-6">
-          {/* Hamburger Menu (Mobile) and Page Title */}
           <div className="flex items-center">
             <button className="lg:hidden mr-4 text-slate-900" onClick={() => setIsMenuOpen(true)}>
               <Menu size={24} />
@@ -43,9 +41,7 @@ const Header = ({ setIsMenuOpen }) => {
             </h1>
           </div>
   
-          {/* Right Side Icons */}
           <div className="flex items-center space-x-4">
-            {/* Notification Dropdown */}
             <div className="relative" ref={dropdownRef}>
               <button
                 className="p-2 rounded-full text-slate-600 hover:bg-slate-100 transition-colors duration-200 relative"
@@ -73,8 +69,7 @@ const Header = ({ setIsMenuOpen }) => {
                 </div>
               )}
             </div>
-  
-            {/* User Avatar (Desktop) */}
+
             <img
               className="w-8 h-8 rounded-full cursor-pointer object-cover lg:block hidden border border-yellow-400"
               src={USER_PROFILE.profileImage}
