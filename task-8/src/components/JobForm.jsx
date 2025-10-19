@@ -32,7 +32,7 @@ const JobForm = ({ job, onSubmit, onCancel }) => {
       <div className="bg-card rounded-2xl shadow-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="sticky bg-secondary top-0 bg-card border-b border-border px-6 py-4 flex items-center justify-between">
           <h2 className="text-2xl font-semibold">
-            {job ? 'Edit Application' : 'Add New Application'}
+            {job ? 'Edit Application' : 'Add Application'}
           </h2>
           <button
             onClick={onCancel}

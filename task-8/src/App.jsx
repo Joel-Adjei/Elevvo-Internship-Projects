@@ -3,9 +3,9 @@ import { JobProvider } from "./contexts/JobContext";
 import Jobs from "./pages/Jobs";
 import Dashboard from "./pages/Dashboard";
 import JobDetail from "./pages/JobDetails";
-import RootLayout from "./components/layout/RootLayout";
+import RootLayout from "./layout/RootLayout";
 import { ToastContainer } from "react-toastify";
-import JobLayout from "./components/layout/JobLayout";
+import JobLayout from "./layout/JobLayout";
 import NotFound from "./pages/NotFound";
 
 function App() {

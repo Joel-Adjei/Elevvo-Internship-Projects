@@ -1,9 +1,9 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useJobs } from "../../contexts/JobContext";
+import { useJobs } from "../contexts/JobContext";
 import { Briefcase, Download, Plus, Upload } from "lucide-react";
-import JobForm from "../JobForm";
+import JobForm from "../components/JobForm";
 
 const JobLayout = () => {
   const { exportJobs, importJobs,addJob, isFormOpen , setIsFormOpen } = useJobs();
@@ -62,7 +62,7 @@ const JobLayout = () => {
                 className="flex items-center gap-2 px-4 py-2 text-sm bg-primary text-primary-foreground rounded-full hover:bg-primary-hover transition-smooth"
               >
                 <Plus className="w-4 h-4" />
-                Add Application
+                Add
               </button>
             </div>
           </div>
